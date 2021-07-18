@@ -1,5 +1,6 @@
 package com.example.cardealership.passengercar;
 
+import com.example.cardealership.enums.VehicleStatus;
 import com.example.cardealership.vehicle.Vehicle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,8 @@ public class PassengerCar extends Vehicle {
         passengerCar.setManufacturer(passengerCarDTO.getManufacturer());
         passengerCar.setYear(passengerCarDTO.getYear());
         passengerCar.setPrice(passengerCarDTO.getPrice());
-        passengerCar.setStatus(passengerCarDTO.getStatus());
+        passengerCar.setStatus(VehicleStatus.AVAIABLE);
+        passengerCar.setDoors(passengerCarDTO.getDoors());
         passengerCar.setHasAirConditioning(passengerCarDTO.isHasAirConditioning());
         passengerCar.setHasHydraulicDriving(passengerCarDTO.isHasHydraulicDriving());
         return passengerCar;

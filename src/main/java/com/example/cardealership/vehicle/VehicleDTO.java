@@ -32,6 +32,4 @@ public class VehicleDTO {
     @NotNull
     private double price;
 
-    private VehicleStatus status;
-
 }
