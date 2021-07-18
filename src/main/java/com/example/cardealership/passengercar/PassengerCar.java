@@ -22,4 +22,17 @@ public class PassengerCar extends Vehicle {
     @JsonProperty("hydraulic_driving")
     private boolean hasHydraulicDriving;
 
+    public static PassengerCar of(PassengerCarDTO passengerCarDTO) {
+        PassengerCar passengerCar = new PassengerCar();
+        passengerCar.setLicensePlate(passengerCarDTO.getLicensePlate());
+        passengerCar.setColor(passengerCarDTO.getColor());
+        passengerCar.setModel(passengerCarDTO.getModel());
+        passengerCar.setManufacturer(passengerCarDTO.getManufacturer());
+        passengerCar.setYear(passengerCarDTO.getYear());
+        passengerCar.setPrice(passengerCarDTO.getPrice());
+        passengerCar.setStatus(passengerCarDTO.getStatus());
+        passengerCar.setHasAirConditioning(passengerCarDTO.isHasAirConditioning());
+        passengerCar.setHasHydraulicDriving(passengerCarDTO.isHasHydraulicDriving());
+        return passengerCar;
+    }
 }
