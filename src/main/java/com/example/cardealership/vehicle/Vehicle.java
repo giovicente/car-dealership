@@ -29,7 +29,7 @@ public class Vehicle {
 
     @JsonProperty("license_plate")
     @NotBlank
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String licensePlate;
 
     @NotBlank
