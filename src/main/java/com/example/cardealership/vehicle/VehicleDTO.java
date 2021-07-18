@@ -1,6 +1,5 @@
 package com.example.cardealership.vehicle;
 
-import com.example.cardealership.enums.VehicleStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class VehicleDTO {
 
     @JsonProperty("license_plate")
+    @NotBlank
     private String licensePlate;
 
     @NotBlank
