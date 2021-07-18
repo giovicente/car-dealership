@@ -5,24 +5,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
+
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Id;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@MappedSuperclass
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @JsonProperty("vehicle_id")
+    private long vehicleId;
 
     @JsonProperty("license_plate")
     @NotBlank
@@ -49,7 +52,6 @@ public class Vehicle {
     @Column(nullable = false)
     private double price;
 
-    @JsonProperty("status")
     private VehicleStatus status;
 
 }
