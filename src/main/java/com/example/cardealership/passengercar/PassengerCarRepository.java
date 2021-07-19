@@ -2,4 +2,8 @@ package com.example.cardealership.passengercar;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface PassengerCarRepository extends CrudRepository<PassengerCar, Long> { }
+import java.util.Optional;
+
+public interface PassengerCarRepository extends CrudRepository<PassengerCar, Long> {
+    Optional<PassengerCar> findOneByLicensePlateIgnoreCase(String licensePLate);
+}
