@@ -2,7 +2,6 @@ package com.example.cardealership.passengercar;
 
 import com.example.cardealership.enums.VehicleStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
