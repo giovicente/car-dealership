@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -55,6 +56,24 @@ public class PassengerCarRestControllerTest {
                 .content(passengerCarJson))
                 .andExpect(MockMvcResultMatchers.status().isCreated()
                 );
+    }
+
+    @Test
+    public void testGetByLicensePlateSuccess() throws Exception {
+        Mockito.when(service.getByLicensePlate(Mockito.anyString())).thenReturn(passengerCar);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/passenger-cars/DY5E367")
+                .pathInfo("/{license_plate}"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testGetByLicensePlateFail() throws Exception {
+        Mockito.when(service.getByLicensePlate(Mockito.anyString())).thenThrow(NotFound.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/passenger-cars/T337HHC")
+                .pathInfo("/{license_plate}"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 }

@@ -4,10 +4,14 @@ import com.example.cardealership.enums.VehicleStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.Optional;
 
 @SpringBootTest
 public class PassengerCarServiceTest {
@@ -41,6 +45,21 @@ public class PassengerCarServiceTest {
         PassengerCar passengerCarTest = service.save(passengerCar);
 
         Assertions.assertSame(passengerCar, passengerCarTest);
+    }
+
+    @Test
+    public void testGetByLicensePlateSuccess() throws NotFound {
+        Mockito.when(repository.findOneByLicensePlateIgnoreCase(Mockito.anyString())).thenReturn(Optional.of(passengerCar));
+        PassengerCar passengerCarTest = service.getByLicensePlate("DY5E367");
+
+        Assertions.assertSame(passengerCar, passengerCarTest);
+    }
+
+    @Test
+    public void testGetByLicensePlateFail() throws NotFound {
+        Mockito.when(repository.findOneByLicensePlateIgnoreCase(Mockito.anyString())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(NotFound.class, () -> { service.getByLicensePlate(Mockito.anyString()); });
     }
 
 }
