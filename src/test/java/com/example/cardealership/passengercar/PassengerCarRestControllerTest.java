@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -69,7 +68,7 @@ public class PassengerCarRestControllerTest {
 
     @Test
     public void testGetByLicensePlateFail() throws Exception {
-        Mockito.when(service.getByLicensePlate(Mockito.anyString())).thenThrow(NotFound.class);
+        Mockito.when(service.getByLicensePlate(Mockito.anyString())).thenThrow(RuntimeException.class);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/passenger-cars/T337HHC")
                 .pathInfo("/{license_plate}"))

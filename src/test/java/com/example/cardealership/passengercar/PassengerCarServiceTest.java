@@ -4,9 +4,7 @@ import com.example.cardealership.enums.VehicleStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -48,7 +46,7 @@ public class PassengerCarServiceTest {
     }
 
     @Test
-    public void testGetByLicensePlateSuccess() throws NotFound {
+    public void testGetByLicensePlateSuccess() throws RuntimeException {
         Mockito.when(repository.findOneByLicensePlateIgnoreCase(Mockito.anyString())).thenReturn(Optional.of(passengerCar));
         PassengerCar passengerCarTest = service.getByLicensePlate("DY5E367");
 
@@ -56,10 +54,10 @@ public class PassengerCarServiceTest {
     }
 
     @Test
-    public void testGetByLicensePlateFail() throws NotFound {
+    public void testGetByLicensePlateFail() throws RuntimeException {
         Mockito.when(repository.findOneByLicensePlateIgnoreCase(Mockito.anyString())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(NotFound.class, () -> { service.getByLicensePlate(Mockito.anyString()); });
+        Assertions.assertThrows(RuntimeException.class, () -> { service.getByLicensePlate(Mockito.anyString()); });
     }
 
 }

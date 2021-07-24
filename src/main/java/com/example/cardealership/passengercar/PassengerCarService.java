@@ -1,6 +1,5 @@
 package com.example.cardealership.passengercar;
 
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,9 @@ public class PassengerCarService {
 
     public PassengerCar save(PassengerCar newPassengerCar) { return repository.save(newPassengerCar); }
 
-    public PassengerCar getByLicensePlate(String licensePlate) throws NotFound {
+    public PassengerCar getByLicensePlate(String licensePlate) throws RuntimeException {
         return repository.findOneByLicensePlateIgnoreCase(licensePlate)
-                .orElseThrow(NotFound::new);
+                .orElseThrow(RuntimeException::new);
     }
 
 }

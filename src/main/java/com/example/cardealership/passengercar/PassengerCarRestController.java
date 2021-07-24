@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +33,10 @@ public class PassengerCarRestController {
 
     @ApiOperation(value = "Find a passenger car by its license plate", response = PassengerCar.class)
     @GetMapping("/{license_plate}")
-    public PassengerCar getByLicensePlate(@PathVariable(name = "license_plate") String licensePlate) throws NotFound {
+    public PassengerCar getByLicensePlate(@PathVariable(name = "license_plate") String licensePlate) throws RuntimeException {
         try {
             return service.getByLicensePlate(licensePlate);
-        } catch (NotFound exception) {
+        } catch (RuntimeException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
