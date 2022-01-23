@@ -13,6 +13,12 @@ import springfox.documentation.builders.ApiInfoBuilder;
 @Configuration
 @EnableSwagger2
 public class SpringFoxConfig {
+
+    /**
+     * Running Swagger locally
+     * http://localhost:8080/swagger-ui/index.html
+     */
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
